@@ -98,7 +98,7 @@ func LoadPrivateKey(keyString []byte) (*rsa.PrivateKey, error) {
 // Using os.ReadFile() satisfyies it.
 func LoadPublicKey(keyString []byte) (*rsa.PublicKey, error) {
 	block, _ := pem.Decode([]byte(string(keyString)))
-	publicKey, _ := x509.ParsePKCS1PublicKey(block.Bytes)
+	publicKey, err := x509.ParsePKCS1PublicKey(block.Bytes)
 
-	return publicKey, nil
+	return publicKey, err
 }
