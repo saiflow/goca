@@ -225,7 +225,7 @@ definitions:
 info:
   contact:
     name: GoCA API Issues Report
-    url: http://github.com/kairoaraujo/goca/issues
+    url: http://github.com/saiflow/goca/issues
   description: GoCA Certificate Authority Management API.
   license:
     name: MIT

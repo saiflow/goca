@@ -11,7 +11,7 @@ const docTemplate = `{
         "title": "{{.Title}}",
         "contact": {
             "name": "GoCA API Issues Report",
-            "url": "http://github.com/kairoaraujo/goca/issues"
+            "url": "http://github.com/saiflow/goca/issues"
         },
         "license": {
             "name": "MIT",

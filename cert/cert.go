@@ -43,8 +43,8 @@ import (
 	"path/filepath"
 	"time"
 
-	storage "github.com/kairoaraujo/goca/v2/_storage"
-	"github.com/kairoaraujo/goca/v2/key"
+	storage "github.com/saiflow/goca/v2/_storage"
+	"github.com/saiflow/goca/v2/key"
 )
 
 const (
@@ -124,7 +124,7 @@ func CreateCSR(CACommonName, commonName, country, province, locality, organizati
 
 // LoadCSR loads a Certificate Signing Request from a read file.
 //
-// Using ioutil.ReadFile() satisfyies the read file.
+// Using os.ReadFile() satisfyies the read file.
 func LoadCSR(csrString []byte) (*x509.CertificateRequest, error) {
 	block, _ := pem.Decode([]byte(string(csrString)))
 	csr, _ := x509.ParseCertificateRequest(block.Bytes)
@@ -134,7 +134,7 @@ func LoadCSR(csrString []byte) (*x509.CertificateRequest, error) {
 
 // LoadCRL loads a Certificate Revocation List from a read file.
 //
-// Using ioutil.ReadFile() satisfyies the read file.
+// Using os.ReadFile() satisfyies the read file.
 func LoadCRL(crlString []byte) (*x509.RevocationList, error) {
 	block, _ := pem.Decode([]byte(string(crlString)))
 	crl, _ := x509.ParseRevocationList(block.Bytes)
@@ -306,7 +306,7 @@ func CreateCACert(
 
 // LoadCert loads a certifiate from a read file (bytes).
 //
-// Using ioutil.ReadFile() satisfyies the read file.
+// Using os.ReadFile() satisfyies the read file.
 func LoadCert(certString []byte) (*x509.Certificate, error) {
 	block, _ := pem.Decode([]byte(string(certString)))
 	cert, _ := x509.ParseCertificate(block.Bytes)

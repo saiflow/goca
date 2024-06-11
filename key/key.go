@@ -35,7 +35,7 @@ import (
 	"crypto/x509"
 	"encoding/pem"
 
-	storage "github.com/kairoaraujo/goca/v2/_storage"
+	storage "github.com/saiflow/goca/v2/_storage"
 )
 
 // KeysData represents the RSA keys with Private Key (Key) and Public Key (Public Key).
@@ -85,17 +85,17 @@ func CreateKeys(CACommonName, commonName string, creationType storage.CreationTy
 
 // LoadPrivateKey loads a RSA Private Key from a read file.
 //
-// Using ioutil.ReadFile() satisfyies it.
+// Using os.ReadFile() satisfyies it.
 func LoadPrivateKey(keyString []byte) (*rsa.PrivateKey, error) {
 	block, _ := pem.Decode([]byte(string(keyString)))
-	privateKey, _ := x509.ParsePKCS1PrivateKey(block.Bytes)
+	privateKey, _ := x509.ParsePKCS8PrivateKey(block.Bytes)
 
-	return privateKey, nil
+	return privateKey.(*rsa.PrivateKey), nil
 }
 
 // LoadPublicKey loads a RSA Public Key from a read file.
 //
-// Using ioutil.ReadFile() satisfyies it.
+// Using os.ReadFile() satisfyies it.
 func LoadPublicKey(keyString []byte) (*rsa.PublicKey, error) {
 	block, _ := pem.Decode([]byte(string(keyString)))
 	publicKey, _ := x509.ParsePKCS1PublicKey(block.Bytes)

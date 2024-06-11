@@ -1,4 +1,4 @@
-module github.com/kairoaraujo/goca/v2
+module github.com/saiflow/goca/v2
 
 go 1.21
 

@@ -1,6 +1,6 @@
 // MIT License
 //
-// Copyright (c) 2020, Kairo de Araujo
+// # Copyright (c) 2020, Kairo de Araujo
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -28,7 +28,7 @@ import (
 	"encoding/pem"
 	"errors"
 	"io"
-	"io/ioutil"
+	"log"
 	"os"
 	"path/filepath"
 	"strings"
@@ -59,9 +59,15 @@ func savePEMKey(fileName string, key *rsa.PrivateKey) {
 	err = os.Chmod(fileName, 0600)
 	checkError(err)
 
+	marshalledKey, err := x509.MarshalPKCS8PrivateKey(key)
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
 	var privateKey = &pem.Block{
 		Type:  "PRIVATE KEY",
-		Bytes: x509.MarshalPKCS1PrivateKey(key),
+		Bytes: marshalledKey,
 	}
 
 	err = pem.Encode(outFile, privateKey)
@@ -285,7 +291,7 @@ func LoadFile(filePath ...string) ([]byte, error) {
 		return nil, err
 	}
 
-	fileData, err := ioutil.ReadFile(filepath.Join(caPath, fileName))
+	fileData, err := os.ReadFile(filepath.Join(caPath, fileName))
 	if err != nil {
 		return []byte{}, err
 	}
